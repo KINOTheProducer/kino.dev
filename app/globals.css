@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.gradient {
+  @apply transition ease-in-out duration-500 bg-gradient-to-r from-primary to-accent text-transparent bg-clip-text hover:brightness-150 hover:bg-gradient-to-tr;
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

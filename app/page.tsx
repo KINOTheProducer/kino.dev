@@ -3,7 +3,7 @@ import Header from './components/Header';
 
 export default function Home() {
   return (
-    <div className='bg-black min-h-screen'>
+    <div className='bg-secondary min-h-screen'>
       <Head>
         <title>KINO Dev Portfolio</title>
         <meta
@@ -17,7 +17,6 @@ export default function Home() {
       </Head>
 
       <Header />
-      
     </div>
   );
 }
