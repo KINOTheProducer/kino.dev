@@ -1,56 +1,59 @@
-'use client';
+// 'use client';
 
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  ReactNode,
-} from 'react';
+// import React, {
+//   createContext,
+//   useContext,
+//   useEffect,
+//   useState,
+//   ReactNode,
+// } from 'react';
 
-interface ScrollContextProps {
-  scrollY: number;
-}
+// interface ScrollContextProps {
+//   scrollY: number;
+// }
 
-interface ScrollProviderProps {
-  children: ReactNode;
-}
+// interface ScrollProviderProps {
+//   children: ReactNode;
+// }
 
-const ScrollContext = createContext<
-  ScrollContextProps | undefined
->(undefined);
+// const ScrollContext = createContext<
+//   ScrollContextProps | undefined
+// >(undefined);
 
-export const ScrollProvider: React.FC<
-  ScrollProviderProps
-> = ({ children }) => {
-  const [scrollY, setScrollY] = useState(0);
+// export const ScrollProvider: React.FC<
+//   ScrollProviderProps
+// > = ({ children }) => {
+//   const [scrollY, setScrollY] = useState(0);
 
-  const handleScroll = () => {
-    setScrollY(window.scrollY);
-  };
+//   const handleScroll = () => {
+//     setScrollY(window.scrollY);
+//   };
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+//   useEffect(() => {
+//     window.addEventListener('scroll', handleScroll);
+//     return () => {
+//       window.removeEventListener('scroll', handleScroll);
+//     };
+//   }, []);
 
-  const value = { scrollY };
+//   const value = { scrollY };
 
-  return (
-    <ScrollContext.Provider value={value}>
-      {children}
-    </ScrollContext.Provider>
-  );
-};
+//   return (
+//     console.log(scrollY),
+//     (
+//       <ScrollContext.Provider value={value}>
+//         {children}
+//       </ScrollContext.Provider>
+//     )
+//   );
+// };
 
-export const useScroll = (): ScrollContextProps => {
-  const context = useContext(ScrollContext);
-  if (!context) {
-    throw new Error(
-      'useScroll must be used within a ScrollProvider',
-    );
-  }
-  return context;
-};
+// export const useScroll = (): ScrollContextProps => {
+//   const context = useContext(ScrollContext);
+//   if (!context) {
+//     throw new Error(
+//       'useScroll must be used within a ScrollProvider',
+//     );
+//   }
+//   return context;
+// };

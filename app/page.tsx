@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import Header from './components/Header';
-import { ScrollProvider } from './utils/ScrollContext';
+import Header from '../components/Header';
+import Navbar from '../components/Navbar';
 
 export default function Home() {
   return (
@@ -16,10 +16,8 @@ export default function Home() {
           href='/favicon.ico'
         />
       </Head>
-      <ScrollProvider>
-        <Header />
-        <Header />
-      </ScrollProvider>
+      <Navbar />
+      <Header />
     </div>
   );
 }
