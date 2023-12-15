@@ -4,7 +4,6 @@ import React, { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { ThemeToggle } from '@/app/utils/ThemeToggle';
 
 const Navbar: React.FC = () => {
   let pathname = usePathname() || '/';
@@ -61,9 +60,6 @@ const Navbar: React.FC = () => {
               </Link>
             );
           })}
-        </div>
-        <div className='ml-auto'>
-          <ThemeToggle />
         </div>
       </div>
     </motion.nav>

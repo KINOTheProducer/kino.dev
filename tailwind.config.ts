@@ -17,8 +17,6 @@ module.exports = {
     },
     extend: {
       colors: {
-        gradientPrimary: '#516395',
-        gradientSecondary: '#614385',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -71,10 +69,14 @@ module.exports = {
           },
           to: { height: 0 },
         },
+        gradient: {
+          to: { 'background-position': '200% center' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        gradient: 'gradient 15s linear infinite',
       },
     },
   },

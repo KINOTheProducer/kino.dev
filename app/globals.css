@@ -82,5 +82,5 @@ body {
 }
 
 .gradient {
-  @apply transition ease-in-out duration-500 bg-gradient-to-r from-gradientPrimary to-gradientSecondary text-transparent bg-clip-text brightness-150 hover:bg-gradient-to-tr;
+  @apply bg-[linear-gradient(to_right,#516395,#7192b5,#7a78a8,#6b6d93,#614385,#6b6d93,#7a78a8,#7192b5,#516395)] bg-[length:200%_auto] text-transparent bg-clip-text brightness-150 animate-gradient;
 }
