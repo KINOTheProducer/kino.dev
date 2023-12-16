@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import { motion, useAnimation } from 'framer-motion';
-import PageContainer from '../app/PageContainer';
 
 export default function Home() {
   // const { scrollY } = useScroll();
@@ -24,18 +23,16 @@ export default function Home() {
   // }, [scrollY, controls, xOffset]);
 
   return (
-    <PageContainer>
-      <div className='container mx-auto py-10 px-4 flex flex-col items-center justify-center h-screen'>
-        <motion.h1
-          className='font-bold mb-5 gradient z-20 text-9xl'
-          // animate={controls}
-        >
-          kino.dev
-        </motion.h1>
-        <motion.p className='text-4xl text-center'>
-          Internet Website Maker Man&trade;
-        </motion.p>
-      </div>
-    </PageContainer>
+    <div className='container-page'>
+      <motion.h1
+        className='font-bold mb-5 gradient z-20 text-9xl'
+        // animate={controls}
+      >
+        kino.dev
+      </motion.h1>
+      <motion.p className='text-4xl text-center'>
+        Internet Website Maker Man&trade;
+      </motion.p>
+    </div>
   );
 }

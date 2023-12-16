@@ -1,10 +1,11 @@
 import Head from 'next/head';
-import Header from '../components/Header';
+import Header from './(pages)/header/Header';
 import Navbar from '../components/Navbar';
+import About from './(pages)/about/page';
 
 export default function Home() {
   return (
-    <div className='bg-secondary min-h-screen h-full'>
+    <div className='min-h-screen h-full'>
       <Head>
         <title>KINO Dev Portfolio</title>
         <meta
@@ -16,7 +17,6 @@ export default function Home() {
           href='/favicon.ico'
         />
       </Head>
-      <Navbar />
       <Header />
     </div>
   );

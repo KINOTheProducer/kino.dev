@@ -3,6 +3,7 @@ import './globals.css';
 import { Poppins } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from '../components/theme-provider';
+import Navbar from '@/components/Navbar';
 
 const poppins = Poppins({
   weight: ['400', '600'],
@@ -30,12 +31,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={cn('container', poppins.className)}>
+      {/* fix this later, remove cn if not using variables in here */}
+      <body className={cn(poppins.className)}>
         <ThemeProvider
           attribute='class'
           defaultTheme='dark'
           disableTransitionOnChange
         >
+          <Navbar />
           {children}
         </ThemeProvider>
       </body>
