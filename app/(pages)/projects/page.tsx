@@ -11,7 +11,8 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import Image from 'next/image';
-import Project1 from '@/components/img/p1.png';
+import Link from 'next/link';
+import { CardContentData } from './CardContentData';
 
 const Projects = () => {
   return (
@@ -51,74 +52,45 @@ const Projects = () => {
         </div>
         <div>
           <div className='flex flex-row gap-6'>
-            <Card>
-              <CardHeader>
-                <CardTitle>Project #1</CardTitle>
-                <CardDescription className='text-left'>
-                  This is the first project I have worked
-                  on.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className='flex flex-col'>
-                <div className='flex flex-row mb-5'>
-                  <Image
-                    src={Project1}
-                    width={300}
-                    height={300}
-                    alt='Project 1 Image'
-                  />
-                </div>
-                {/* put image here from ProjectsCardContent file, when made */}
-                <div className='flex flex-row'>
-                  <Badge variant='outline'>Next.JS</Badge>
-                  <Badge variant='outline'>
-                    Typescript
-                  </Badge>
-                  <Badge variant='outline'>Tailwind</Badge>
-                </div>
-              </CardContent>
-              <CardFooter className='place-content-end'>
-                <Button
-                  variant='secondary'
-                  className='font-semibold'
-                >
-                  Live Demo
-                </Button>
-                {/* pull the stack used here, map it in from the ProjectsCardContent file, when made, mapping to individual badges */}
-              </CardFooter>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>Project #1</CardTitle>
-                <CardDescription className='text-left'>
-                  This is the first project I have worked
-                  on.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>Ipsussy</CardContent>
-              <CardFooter>
-                <Badge variant='outline'>Next.JS</Badge>
-                <Badge variant='outline'>Typescript</Badge>
-                <Badge variant='outline'>Tailwind</Badge>
-                {/* put the badges for stack used here, map it in from the ProjectsCardContent file, when made */}
-              </CardFooter>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>Project #1</CardTitle>
-                <CardDescription className='text-left'>
-                  This is the first project I have worked
-                  on.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>Ipsussy</CardContent>
-              <CardFooter>
-                <Badge variant='outline'>Next.JS</Badge>
-                <Badge variant='outline'>Typescript</Badge>
-                <Badge variant='outline'>Tailwind</Badge>
-                {/* put the badges for stack used here, map it in from the ProjectsCardContent file, when made */}
-              </CardFooter>
-            </Card>
+            {CardContentData.map((data) => (
+              <Card key={data.id}>
+                <CardHeader>
+                  <CardTitle>{data.title}</CardTitle>
+                  <CardDescription className='text-left'>
+                    {data.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className='flex flex-col'>
+                  <div className='flex flex-row mb-5'>
+                    <Image
+                      src={data.image}
+                      width={300}
+                      height={300}
+                      //   change this later
+                      alt='testing'
+                    />
+                  </div>
+                  <div className='flex flex-row gap-1'>
+                    {data.stack.map((stack) => (
+                      <Badge
+                        key={stack}
+                        color='outline'
+                      >
+                        {stack}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+                <CardFooter className='place-content-end'>
+                  <Button
+                    variant='secondary'
+                    className='font-semibold'
+                  >
+                    <Link href={data.link}>Live Demo</Link>
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
           </div>
         </div>
       </div>
