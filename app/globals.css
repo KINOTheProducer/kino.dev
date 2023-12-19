@@ -58,18 +58,18 @@
   }
 }
 
-html,
+/* html,
 body {
   height: 100vh;
   overflow: hidden;
-}
+} */
 
 .gradient {
   @apply bg-[linear-gradient(to_right,#516395,#7192b5,#7a78a8,#6b6d93,#614385,#6b6d93,#7a78a8,#7192b5,#516395)] bg-[length:200%_auto] text-transparent bg-clip-text brightness-150 animate-gradient;
 }
 
 .container-page {
-  @apply mx-auto py-20 px-20 h-screen flex flex-col justify-center items-center text-center;
+  @apply py-10 px-4 md:py-20 md:px-12 lg:py-24 lg:px-16 xl:py-28 xl:px-20 h-screen flex flex-col md:justify-center items-center text-center;
 }
 
 /* * {
