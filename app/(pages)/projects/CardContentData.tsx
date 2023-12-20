@@ -1,51 +1,49 @@
-import p1 from '@/components/p1.png';
-
 export interface cardData {
-  id: number;
   title: string;
   description: string;
   image: string;
   link: string;
   stack: string[];
-  type: string;
+  type: ProjectType[];
 }
 [];
 
+export type ProjectType =
+  | 'fullstack'
+  | 'frontend'
+  | 'backend';
+
 export const CardContentData: cardData[] = [
   {
-    id: 1,
-    title: 'Matchify',
+    title: 'Frontend',
     description: 'League of Legends Match History',
     image: '/projects/p1.png',
     link: 'https://matchify-topaz.vercel.app/',
     stack: ['Next.JS', 'Javascript', 'Tailwind'],
-    type: 'fullstack',
+    type: ['frontend'],
   },
   {
-    id: 1,
-    title: 'Matchify',
+    title: 'Fullstack',
     description: 'League of Legends Match History',
     image: '/projects/p1.png',
     link: 'https://matchify-topaz.vercel.app/',
     stack: ['Next.JS', 'Javascript', 'Tailwind'],
-    type: 'fullstack',
+    type: ['fullstack', 'frontend', 'backend'],
   },
   {
-    id: 1,
-    title: 'Matchify',
+    title: 'Backend',
     description: 'League of Legends Match History',
     image: '/projects/p1.png',
     link: 'https://matchify-topaz.vercel.app/',
     stack: ['Next.JS', 'Javascript', 'Tailwind'],
-    type: 'fullstack',
+    type: ['backend'],
   },
   {
-    id: 1,
-    title: 'Matchify',
+    title: 'Fullstack',
     description: 'League of Legends Match History',
     image: '/projects/p1.png',
     link: 'https://matchify-topaz.vercel.app/',
     stack: ['Next.JS', 'Javascript', 'Tailwind'],
-    type: 'fullstack',
+    type: ['fullstack', 'frontend', 'backend'],
   },
 ];

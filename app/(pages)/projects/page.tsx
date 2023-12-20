@@ -11,23 +11,72 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
 import Image from 'next/image';
 import Link from 'next/link';
-import { CardContentData } from './CardContentData';
+import {
+  CardContentData,
+  ProjectType,
+} from './CardContentData';
 import { useState } from 'react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 const Projects = () => {
   const projectsPerPageLG = 3;
   const projectsPerPageMD = 2;
   const [currentPage, setCurrentPage] = useState(0);
+  const [filterType, setFilterType] =
+    useState<null | ProjectType>(null);
 
+  const handleFilter = (type: null | ProjectType) => {
+    const filterSelector =
+      filterType === type ? null : type;
+    setFilterType(filterSelector);
+    setCurrentPage(0);
+  };
+
+  // possibly do this with Object.groupBy() if this gets slow
+  const filteredProjects = CardContentData.filter(
+    (project) =>
+      !filterType || project.type.includes(filterType),
+  ).sort((a, b) => {
+    if (filterType === null) {
+      const order = ['fullstack', 'frontend', 'backend'];
+      const indexA = order.indexOf(a.type[0]);
+      const indexB = order.indexOf(b.type[0]);
+      return indexA - indexB;
+    }
+
+    const filterLength = Math.min(
+      a.type.length,
+      b.type.length,
+    );
+
+    for (let i = 0; i < filterLength; i++) {
+      const filterA = a.type[i];
+      const filterB = b.type[i];
+
+      if (
+        filterA === filterType &&
+        filterB !== filterType
+      ) {
+        return -1;
+      } else if (
+        filterB === filterType &&
+        filterA !== filterType
+      ) {
+        return 1;
+      }
+    }
+    return 0;
+  });
+
+  // possibly refactor this?
   const projectsPerPage =
     window.innerWidth < 1300
       ? projectsPerPageMD
       : projectsPerPageLG;
 
-  const totalProjects = CardContentData.length;
+  const totalProjects = filteredProjects.length;
   const totalPages = Math.ceil(
     totalProjects / projectsPerPage,
   );
@@ -48,7 +97,7 @@ const Projects = () => {
   const startIndex = currentPage * projectsPerPage;
   const endIndex = startIndex + projectsPerPage;
 
-  const visibleProjects = CardContentData.slice(
+  const visibleProjects = filteredProjects.slice(
     startIndex,
     endIndex,
   );
@@ -67,22 +116,50 @@ const Projects = () => {
             with fullstack development.
           </p>
           Filter by:
-          <div className='flex flex-row gap-3 w-full align-center justify-center items-center my-1'>
+          <div className='flex flex-row flex-wrap gap-3 w-full align-center justify-center items-center my-1'>
             <Button
               color='primary'
+              variant={
+                filterType === null ? 'default' : 'outline'
+              }
               className='font-semibold'
+              onClick={() => handleFilter(null)}
+            >
+              All
+            </Button>
+            <Button
+              color='primary'
+              variant={
+                filterType === 'frontend'
+                  ? 'default'
+                  : 'outline'
+              }
+              className='font-semibold'
+              onClick={() => handleFilter('frontend')}
             >
               Frontend
             </Button>
             <Button
               color='primary'
+              variant={
+                filterType === 'backend'
+                  ? 'default'
+                  : 'outline'
+              }
               className='font-semibold'
+              onClick={() => handleFilter('backend')}
             >
               Backend
             </Button>
             <Button
               color='primary'
+              variant={
+                filterType === 'fullstack'
+                  ? 'default'
+                  : 'outline'
+              }
               className='font-semibold'
+              onClick={() => handleFilter('fullstack')}
             >
               Fullstack
             </Button>
@@ -91,8 +168,8 @@ const Projects = () => {
         <div>
           <div className='flex flex-row flex-wrap place-content-center gap-3 w-full'>
             {/* {CardContentData.map((data) => ( */}
-            {visibleProjects.map((data) => (
-              <Card key={data.id}>
+            {visibleProjects.map((data, index) => (
+              <Card key={index}>
                 <CardHeader>
                   <CardTitle className='text-xl'>
                     {data.title}
@@ -114,7 +191,7 @@ const Projects = () => {
                     {data.stack.map((stack) => (
                       <Badge
                         key={stack}
-                        variant='secondary'
+                        variant='outline'
                       >
                         {stack}
                       </Badge>
@@ -123,10 +200,7 @@ const Projects = () => {
                 </CardContent>
                 <CardFooter className='place-content-end'>
                   <Link href={data.link}>
-                    <Button
-                      variant='secondary'
-                      className='font-semibold'
-                    >
+                    <Button className='font-semibold'>
                       Live Demo
                     </Button>
                   </Link>
@@ -134,23 +208,29 @@ const Projects = () => {
               </Card>
             ))}
           </div>
-          <div className='flex justify-between mt-5 text-right'>
-            {currentPage > 0 && (
-              <Button
-                variant='secondary'
-                onClick={handlePrevPage}
-              >
-                {'<'}
-              </Button>
-            )}
-            {currentPage < totalPages - 1 && (
-              <Button
-                variant='secondary'
-                onClick={handleNextPage}
-              >
-                {'>'}
-              </Button>
-            )}
+          <div className='flex mt-5 justify-center gap-2'>
+            <Button
+              variant='secondary'
+              onClick={handlePrevPage}
+              style={{
+                visibility:
+                  currentPage > 0 ? 'visible' : 'hidden',
+              }}
+            >
+              <ArrowLeft />
+            </Button>
+            <Button
+              variant='secondary'
+              onClick={handleNextPage}
+              style={{
+                visibility:
+                  currentPage < totalPages - 1
+                    ? 'visible'
+                    : 'hidden',
+              }}
+            >
+              <ArrowRight />
+            </Button>
           </div>
         </div>
       </div>
